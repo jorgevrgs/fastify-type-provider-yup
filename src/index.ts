@@ -7,7 +7,7 @@ import type {
 import type { FastifySerializerCompiler } from "fastify/types/schema";
 import type { AnySchema, InferType, AnyObject } from "yup";
 import { isSchema } from "yup";
-import { convertSchema } from "@sodaru/yup-to-json-schema";
+import { convertSchema, type ResolveOptions } from "@sodaru/yup-to-json-schema";
 
 /**
  * @see https://fastify.dev/docs/latest/Reference/Type-Providers
@@ -111,6 +111,12 @@ export const serializerCompiler: FastifySerializerCompiler<
   };
 };
 
-export const jsonSchemaTransformer = () => {
+const defaultResolveOptions: ResolveOptions = {} as const;
+
+export const createJsonSchemaTransformer = (
+  options = defaultResolveOptions,
+) => {
   // ...
 };
+
+export const jsonSchemaTransformer = createJsonSchemaTransformer();

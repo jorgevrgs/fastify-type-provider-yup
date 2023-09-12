@@ -2,20 +2,20 @@
 
 ## Getting Started
 
-```sh 
+```sh
 pnpm i fastify-type-provider-yup
 yarn i fastify-type-provider-yup
-npm i fastify-type-provider-yup 
+npm i fastify-type-provider-yup
 ```
 
 Register Fastify plugin:
 
 ```js
-import { yupPlugin } from 'fastify-type-provider-yup'
+import { yupPlugin } from "fastify-type-provider-yup";
 
 export const example = async (fastify) => {
-  fastify.register(yupPlugin)
-}
+  fastify.register(yupPlugin);
+};
 ```
 
 Manually registered with Typescript:
@@ -51,11 +51,9 @@ server.withTypeProvider<withTypeProvider>().route({
 server.listen({port: 1337, host: '0.0.0.0'})
 ```
 
-
 ## Aknowledgements
 
 Module heavilty inspired by:
 
 - [fastify-type-provider-zod](https://github.com/turkerdev/fastify-type-provider-zod)
 - [fastify-yup-schema](https://github.com/balcieren/fastify-yup-schema)
-
