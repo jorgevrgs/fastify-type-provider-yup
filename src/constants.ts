@@ -16,5 +16,5 @@ export const defaultYupValidatorCompilerOptions: YupValidatorCompilerOptions = {
   strict: false,
   abortEarly: false,
   stripUnknown: true,
-  recurvise: true,
+  recursive: true,
 };

@@ -1,5 +1,6 @@
 import type { JSONSchema7 } from "json-schema";
 import type { SchemaDescription } from "yup";
+import type { FastifySchema } from "fastify";
 
 export type YupValidatorCompilerOptions = {
   // when true, parsing is skipped and the input is validated "as-is"
@@ -44,11 +45,18 @@ export type ResolveOptions = {
 };
 
 export type YupJsonTransformerOptions = {
-  skiptlist: readonly Array<string>;
+  skiptlist: Array<string>;
   resolveOptions: ResolveOptions;
 };
 
 export type YupPluginOptions = {
-  jsonTransformerOptions: YupJsonTransformerOptions;
+  serializerCompilerOptions: YupValidatorCompilerOptions;
   validatorCompilerOptions: YupValidatorCompilerOptions;
 };
+
+export interface Schema extends FastifySchema {
+  hide?: boolean;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FreeformRecord = Record<string, any>;

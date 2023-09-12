@@ -1,6 +1,7 @@
 import type { AnySchema } from "yup";
-import { isSchema } from "yup";
 import type { YupValidatorCompilerOptions } from "./types";
+import { resolveSchema } from "./helpers";
+import type { FastifySerializerCompiler } from "fastify/types/schema";
 
 const safeParse = <T>(
   schema: Pick<AnySchema, "validateSync">,
@@ -15,20 +16,6 @@ const safeParse = <T>(
     // If validation fails, return an error message
     return { success: false, error: (error as Error).message };
   }
-};
-
-const resolveSchema = (
-  maybeSchema: AnySchema | { properties: AnySchema },
-): maybeSchema is Pick<AnySchema, "validateSync"> => {
-  if (isSchema(maybeSchema)) {
-    return maybeSchema;
-  }
-
-  if ("properties" in maybeSchema && isSchema(maybeSchema.properties)) {
-    return maybeSchema.properties;
-  }
-
-  throw new Error(`Invalid schema passed: ${JSON.stringify(maybeSchema)}`);
 };
 
 export const createSerializerCompiler = (
