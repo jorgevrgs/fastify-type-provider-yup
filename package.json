@@ -16,6 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "@tsconfig/node-lts": "^18.12.5",
+    "@types/json-schema": "^7.0.12",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "eslint": "^8.49.0",
@@ -25,6 +26,7 @@
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
     "fastify": "^4.23.0",
+    "json-schema": "^0.4.0",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2",
     "yup": "^1.2.0"
