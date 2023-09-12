@@ -2,7 +2,8 @@
   "name": "fastify-type-provider-yup",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write .",
@@ -12,7 +13,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@tsconfig/node-lts": "^18.12.5",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
