@@ -1,16 +1,14 @@
-import { convertSchema } from "@sodaru/yup-to-json-schema";
-import type { Schema, FreeformRecord } from "./types";
-import { defaultSkipList, defaultResolveOptions } from "./constants";
-import { resolveSchema } from "./helpers";
+import { convertSchema } from '@sodaru/yup-to-json-schema';
+import { defaultResolveOptions, defaultSkipList } from './constants';
+import { resolveSchema } from './helpers';
+import type { FreeformRecord, Schema } from './types';
 
 const defaultJsonSchemaTransformerOptions = {
   skipList: defaultSkipList,
   resolveOptions: defaultResolveOptions,
 };
 
-export const createJsonSchemaTransformer = (
-  options = defaultJsonSchemaTransformerOptions,
-) => {
+export const createJsonSchemaTransformer = (options = defaultJsonSchemaTransformerOptions) => {
   const { skipList, resolveOptions } = options;
 
   return ({ schema, url }: { schema: Schema; url: string }) => {
@@ -21,8 +19,7 @@ export const createJsonSchemaTransformer = (
       };
     }
 
-    const { response, headers, querystring, body, params, hide, ...rest } =
-      schema;
+    const { response, headers, querystring, body, params, hide, ...rest } = schema;
 
     const transformed: FreeformRecord = {};
 

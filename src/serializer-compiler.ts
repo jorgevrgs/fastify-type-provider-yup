@@ -1,10 +1,10 @@
-import type { AnySchema } from "yup";
-import type { YupValidatorCompilerOptions } from "./types";
-import { resolveSchema } from "./helpers";
-import type { FastifySerializerCompiler } from "fastify/types/schema";
+import type { FastifySerializerCompiler } from 'fastify/types/schema';
+import type { AnySchema } from 'yup';
+import { resolveSchema } from './helpers';
+import type { YupValidatorCompilerOptions } from './types';
 
 const safeParse = <T>(
-  schema: Pick<AnySchema, "validateSync">,
+  schema: Pick<AnySchema, 'validateSync'>,
   data: T,
   options: YupValidatorCompilerOptions,
 ): { success: boolean; data?: T; error?: string } => {
@@ -18,12 +18,10 @@ const safeParse = <T>(
   }
 };
 
-export const createSerializerCompiler = (
-  options: YupValidatorCompilerOptions,
-) => {
-  const serializerCompiler: FastifySerializerCompiler<
-    AnySchema | { properties: AnySchema }
-  > = ({ schema: maybeSchema }) => {
+export const createSerializerCompiler = (options: YupValidatorCompilerOptions) => {
+  const serializerCompiler: FastifySerializerCompiler<AnySchema | { properties: AnySchema }> = ({
+    schema: maybeSchema,
+  }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (data: any) => {
       const schema = resolveSchema(maybeSchema);
@@ -34,7 +32,7 @@ export const createSerializerCompiler = (
         return JSON.stringify(result.data);
       }
 
-      throw new Error("Invalid schema response");
+      throw new Error('Invalid schema response');
     };
   };
 

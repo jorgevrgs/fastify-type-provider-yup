@@ -1,4 +1,4 @@
-import type { AnySchema } from "yup";
+import type { AnySchema } from 'yup';
 
 export const hasOwnProperty = <T, K extends PropertyKey>(
   obj: T,
@@ -10,12 +10,12 @@ export const hasOwnProperty = <T, K extends PropertyKey>(
 
 export const resolveSchema = (
   maybeSchema: AnySchema | { properties: AnySchema },
-): Pick<AnySchema, "validateSync"> => {
-  if (hasOwnProperty(maybeSchema, "validateSync")) {
+): Pick<AnySchema, 'validateSync'> => {
+  if (hasOwnProperty(maybeSchema, 'validateSync')) {
     return maybeSchema;
   }
 
-  if (hasOwnProperty(maybeSchema, "properties")) {
+  if (hasOwnProperty(maybeSchema, 'properties')) {
     return maybeSchema.properties;
   }
 
