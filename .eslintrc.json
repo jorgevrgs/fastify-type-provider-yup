@@ -12,21 +12,19 @@
     "sourceType": "module",
     "project": "tsconfig.eslint.json"
   },
-  "rules": {},
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off"
+  },
   "overrides": [
     {
-      "files": ["**/*.cjs"],
+      "files": ["**/*.cjs", "**/*.mjs"],
       "parserOptions": {
-        "sourceType": "script"
+        "requireConfigFile": false
       },
-      "parser": "esprima"
-    },
-    {
-      "files": ["**/*.mjs"],
-      "parserOptions": {
-        "sourceType": "module"
-      },
-      "parser": "esprima"
+      "parser": "@babel/eslint-parser",
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
     }
   ]
 }

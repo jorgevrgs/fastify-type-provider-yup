@@ -3,13 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/cjs/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
-    },
-    "./dist/types/index.d.ts": "./dist/types/index.d.ts"
-  },
+  "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "pnpm build:esm && pnpm build:cjs",
@@ -19,12 +13,16 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "pnpm test:js && pnpm test:ts",
+    "test:js": "vitest",
+    "test:ts": "vitest typecheck"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.22.17",
+    "@babel/eslint-parser": "^7.22.15",
     "@tsconfig/node-lts": "^18.12.5",
     "@types/json-schema": "^7.0.12",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
@@ -42,6 +40,7 @@
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.2.2",
+    "vitest": "^0.34.4",
     "yup": "^1.2.0"
   },
   "peerDependencies": {
