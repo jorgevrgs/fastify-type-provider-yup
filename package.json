@@ -1,6 +1,6 @@
 {
   "name": "fastify-type-provider-yup",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -18,7 +18,7 @@
     "test:ts": "vitest typecheck"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jorge Vargas <jorgevargasla@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.22.17",
@@ -49,5 +49,16 @@
   },
   "dependencies": {
     "@sodaru/yup-to-json-schema": "^2.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jorgevrgs/fastify-type-provider-yup"
+  },
+  "bugs": {
+    "url": "https://github.com/jorgevrgs/fastify-type-provider-yup/issues"
+  },
+  "homepage": "https://github.com/jorgevrgs/fastify-type-provider-yup#readme",
+  "files": [
+    "dist"
+  ]
 }
