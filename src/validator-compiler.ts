@@ -1,8 +1,9 @@
 import type { FastifySchemaCompiler } from 'fastify';
 import type { AnySchema } from 'yup';
 import { defaultYupValidatorCompilerOptions } from './constants';
+import type { YupValidatorCompilerOptions } from './types';
 
-export const createValidatorCompiler = (options = defaultYupValidatorCompilerOptions) => {
+export const createValidatorCompiler = (options: YupValidatorCompilerOptions) => {
   const validatorCompiler: FastifySchemaCompiler<AnySchema> = ({ schema }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return async (data: any) => {
@@ -22,3 +23,5 @@ export const createValidatorCompiler = (options = defaultYupValidatorCompilerOpt
 
   return validatorCompiler;
 };
+
+export const validatorCompiler = createValidatorCompiler(defaultYupValidatorCompilerOptions);

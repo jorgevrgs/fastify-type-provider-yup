@@ -7,8 +7,7 @@
     ".": {
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
-    },
-    "./dist/types/index.d.ts": "./dist/types/index.d.ts"
+    }
   },
   "types": "dist/types/index.d.ts",
   "scripts": {
@@ -19,7 +18,9 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "pnpm test:js && pnpm:test:ts",
+    "test:js": "vitest",
+    "test:ts": "tsd --files ./src/*.test-d.ts"
   },
   "keywords": [],
   "author": "",
@@ -41,7 +42,9 @@
     "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
+    "tsd": "^0.29.0",
     "typescript": "^5.2.2",
+    "vitest": "^0.34.4",
     "yup": "^1.2.0"
   },
   "peerDependencies": {

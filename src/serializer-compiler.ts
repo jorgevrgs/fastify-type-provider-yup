@@ -1,5 +1,7 @@
 import type { FastifySerializerCompiler } from 'fastify/types/schema';
 import type { AnySchema } from 'yup';
+import { defaultYupValidatorCompilerOptions } from './constants';
+import { ResponseValidationError } from './errors';
 import { resolveSchema } from './helpers';
 import type { YupValidatorCompilerOptions } from './types';
 
@@ -32,9 +34,11 @@ export const createSerializerCompiler = (options: YupValidatorCompilerOptions) =
         return JSON.stringify(result.data);
       }
 
-      throw new Error('Invalid schema response');
+      throw new ResponseValidationError(result);
     };
   };
 
   return serializerCompiler;
 };
+
+export const serializerCompiler = createSerializerCompiler(defaultYupValidatorCompilerOptions);
