@@ -52,8 +52,11 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
+      - name: Install PNPM
+        run: npm i -g pnpm
+
       - name: Install
-        run: pnpm
+        run: pnpm install
 
       - name: Test
         run: pnpm test
