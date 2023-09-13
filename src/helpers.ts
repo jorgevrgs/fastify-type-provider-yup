@@ -1,22 +1,15 @@
 import type { AnySchema } from 'yup';
-
-export const hasOwnProperty = <T, K extends PropertyKey>(
-  obj: T,
-  prop: K,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): obj is T & Record<K, any> => {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-};
+import { isSchema } from 'yup';
 
 export const resolveSchema = (
   maybeSchema: AnySchema | { properties: AnySchema },
 ): Pick<AnySchema, 'validateSync'> => {
-  if (hasOwnProperty(maybeSchema, 'validateSync')) {
-    return maybeSchema;
+  if (isSchema(maybeSchema)) {
+    return maybeSchema as Pick<AnySchema, 'validateSync'>;
   }
 
-  if (hasOwnProperty(maybeSchema, 'properties')) {
-    return maybeSchema.properties;
+  if ('properties' in maybeSchema && isSchema(maybeSchema.properties)) {
+    return maybeSchema.properties as Pick<AnySchema, 'validateSync'>;
   }
 
   throw new Error(`Invalid schema passed: ${JSON.stringify(maybeSchema)}`);
