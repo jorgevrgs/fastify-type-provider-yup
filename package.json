@@ -13,7 +13,7 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "pnpm test:js && pnpm:test:ts",
+    "test": "pnpm test:js && pnpm test:ts",
     "test:js": "vitest",
     "test:ts": "tsd --files ./src/*.test-d.ts"
   },
