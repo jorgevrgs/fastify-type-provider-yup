@@ -1,0 +1,16 @@
+# Exclude TypeScript source files and development files
+**/*.ts
+**/*.tsx
+**/*.d.ts
+tsconfig.json
+tslint.json
+.eslintrc.json
+.babelrc.js
+.prettierrc.js
+webpack.config.js
+rollup.config.js
+.github
+.vscode
+.gitignore
+.npmignore
+
