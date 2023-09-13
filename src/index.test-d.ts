@@ -6,7 +6,7 @@ import type {
   RawServerDefault,
 } from 'fastify';
 import Fastify from 'fastify';
-import { expectAssignable, expectType } from 'tsd';
+import { expectTypeOf } from 'vitest';
 import * as yup from 'yup';
 
 import { serializerCompiler } from '../src/serializer-compiler';
@@ -23,9 +23,9 @@ type FastifyYupInstance = FastifyInstance<
   YupTypeProvider
 >;
 
-expectType<FastifyYupInstance>(fastify.setValidatorCompiler(validatorCompiler));
-expectType<FastifyYupInstance>(fastify.setSerializerCompiler(serializerCompiler));
-expectAssignable<FastifyYupInstance>(fastify);
+expectTypeOf(fastify.setValidatorCompiler(validatorCompiler)).toMatchTypeOf<FastifyYupInstance>;
+expectTypeOf(fastify.setSerializerCompiler(serializerCompiler)).toMatchTypeOf<FastifyYupInstance>;
+expectTypeOf(fastify).toMatchTypeOf<FastifyYupInstance>;
 
 fastify.route({
   method: 'GET',
@@ -39,7 +39,7 @@ fastify.route({
     },
   },
   handler: (request, reply) => {
-    expectType<string>(request.query.name);
+    expectTypeOf<string>(request.query.name).toMatchTypeOf<string>;
     reply.send('string');
   },
 });
