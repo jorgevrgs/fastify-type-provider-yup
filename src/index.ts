@@ -1,3 +1,3 @@
-export * from "./plugin";
-export * from "./validator-compiler";
-export * from "./type-provider";
+export * from './plugin';
+export * from './type-provider';
+export * from './validator-compiler';

@@ -2,10 +2,20 @@
   "name": "fastify-type-provider-yup",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./dist/types/index.d.ts": "./dist/types/index.d.ts"
+  },
+  "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm build:esm && pnpm build:cjs",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "dev:cjs": "tsc-watch --noClear -p ./tsconfig.cjs.json --onSuccess \"node ./examples/plugin-common.example.cjs\"",
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -26,8 +36,11 @@
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
     "fastify": "^4.23.0",
+    "fastify-plugin": "^4.5.1",
     "json-schema": "^0.4.0",
     "prettier": "^3.0.3",
+    "ts-node": "^10.9.1",
+    "tsc-watch": "^6.0.4",
     "typescript": "^5.2.2",
     "yup": "^1.2.0"
   },

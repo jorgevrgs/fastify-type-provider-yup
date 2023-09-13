@@ -11,7 +11,7 @@ npm i fastify-type-provider-yup
 Register Fastify plugin:
 
 ```js
-import { yupPlugin } from "fastify-type-provider-yup";
+import { yupPlugin } from 'fastify-type-provider-yup';
 
 export const example = async (fastify) => {
   fastify.register(yupPlugin);
