@@ -2,8 +2,10 @@
   "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "declaration": true,
+    "declarationMap": true,
     "rootDir": "src",
-    "outDir": "dist"
+    "declarationDir": "dist/types",
+    "lib": ["es2023", "DOM"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["./node_modules", "./**/*.(spec|test|test-d).ts", "./test", "./dist"]
