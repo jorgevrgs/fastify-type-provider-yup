@@ -1,5 +1,6 @@
 # fastify-type-provider-yup
 
+[![NPM Version](https://img.shields.io/npm/v/fastify-type-provider-yup.svg)](https://npmjs.org/package/fastify-type-provider-yup)
 [![CI](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml/badge.svg)](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml)
 
 ## Getting Started
