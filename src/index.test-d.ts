@@ -9,9 +9,9 @@ import Fastify from 'fastify';
 import { expectTypeOf } from 'vitest';
 import * as yup from 'yup';
 
-import { serializerCompiler } from '../src/serializer-compiler';
-import type { YupTypeProvider } from '../src/type-provider';
-import { validatorCompiler } from '../src/validator-compiler';
+import { serializerCompiler } from './serializer-compiler';
+import type { YupTypeProvider } from './type-provider';
+import { validatorCompiler } from './validator-compiler';
 
 const fastify = Fastify().withTypeProvider<YupTypeProvider>();
 
@@ -39,7 +39,7 @@ fastify.route({
     },
   },
   handler: (request, reply) => {
-    expectTypeOf<string>(request.query.name).toMatchTypeOf<string>;
+    expectTypeOf(request.query.name).toMatchTypeOf<string>;
     reply.send('string');
   },
 });

@@ -1,34 +1,46 @@
 # fastify-type-provider-yup
 
+[![NPM Version](https://img.shields.io/npm/v/fastify-type-provider-yup.svg)](https://npmjs.org/package/fastify-type-provider-yup)
+[![CI](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml/badge.svg)](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml)
+
 ## Getting Started
 
 ```sh
-pnpm i fastify-type-provider-yup
-yarn i fastify-type-provider-yup
+pnpm add fastify-type-provider-yup
+yarn add fastify-type-provider-yup
 npm i fastify-type-provider-yup
 ```
 
-Register Fastify plugin:
+## How to use
+
+See [Examples](./examples) folder for more details.
+
+### Register Fastify plugin:
 
 ```js
 import { yupPlugin } from 'fastify-type-provider-yup';
+import fp from 'fastify-plugin';
 
 export const example = async (fastify) => {
-  fastify.register(yupPlugin);
+  fastify.register(fp(yupPlugin));
 };
 ```
 
-Manually registered with Typescript:
+### Manually registered with Typescript:
 
 ```ts
 import Fastify from "fastify";
-import { serializerCompiler, validatorCompiler, type YupTypeProvider  } from 'fastify-type-provider-yup'
+import {
+  serializerCompiler,
+  validatorCompiler,
+  type YupTypeProvider
+} from 'fastify-type-provider-yup';
 import * as yup from yup
 
 const server = Fastify()
 
 server.withTypeProvider<withTypeProvider>().route({
-  method: 'GET',
+  method: 'POST',
   url: '/',
   schema: {
     body: yup.object({
@@ -49,6 +61,73 @@ server.withTypeProvider<withTypeProvider>().route({
 })
 
 server.listen({port: 1337, host: '0.0.0.0'})
+```
+
+### Swagger
+
+```typescript
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUI from '@fastify/swagger-ui';
+import Fastify from 'fastify';
+import * as yup from 'yup';
+import {
+  type YupTypeProvider,
+  validatorCompiler,
+  serializerCompiler,
+  jsonSchemaTransformer,
+} from 'fastify-type-provider-yup';
+import { extendSchema } from '@sodaru/yup-to-json-schema';
+import { Schema, addMethod } from 'yup';
+
+extendSchema({ addMethod, Schema });
+
+const app = Fastify({ logger: true });
+app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
+
+app.register(fastifySwagger, {
+  openapi: {
+    info: {
+      title: 'SampleApi',
+      description: 'Sample backend service',
+      version: '1.0.0',
+    },
+    servers: [],
+  },
+  transform: jsonSchemaTransformer,
+});
+
+app.register(fastifySwaggerUI, {
+  routePrefix: '/docs',
+});
+
+app.after(() => {
+  app.withTypeProvider<YupTypeProvider>().route({
+    url: '/',
+    method: 'POST',
+    schema: {
+      description: 'Description details',
+      tags: ['home'],
+      body: yup.object({
+        page: yup.number().default(1),
+      }),
+      response: {
+        200: yup.object({
+          page: yup.string().example('1'),
+        }),
+      },
+    },
+    handler: async (request, reply) => {
+      const { page } = request.body;
+
+      return {
+        page: String(page),
+      };
+    },
+  });
+});
+
+app.listen({ port: 8080, host: '0.0.0.0' });
 ```
 
 ## Aknowledgements
