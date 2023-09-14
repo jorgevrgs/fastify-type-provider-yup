@@ -1,5 +1,7 @@
 # fastify-type-provider-yup
 
+[![CI](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml/badge.svg)](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml)
+
 ## Getting Started
 
 ```sh
