@@ -23,6 +23,8 @@
   "devDependencies": {
     "@babel/core": "^7.22.17",
     "@babel/eslint-parser": "^7.22.15",
+    "@fastify/swagger": "^8.10.0",
+    "@fastify/swagger-ui": "^1.9.3",
     "@tsconfig/node-lts": "^18.12.5",
     "@types/json-schema": "^7.0.12",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
@@ -36,6 +38,7 @@
     "fastify": "^4.23.0",
     "fastify-plugin": "^4.5.1",
     "json-schema": "^0.4.0",
+    "pino-pretty": "^10.2.0",
     "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
