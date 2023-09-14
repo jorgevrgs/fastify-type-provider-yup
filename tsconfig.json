@@ -5,8 +5,20 @@
     "declarationMap": true,
     "rootDir": "src",
     "declarationDir": "dist/types",
-    "lib": ["es2023", "DOM"]
+    "lib": [
+      "es2023",
+      "DOM"
+    ]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["./node_modules", "./**/*.(spec|test|test-d).ts", "./test", "./dist"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "./node_modules",
+    "./**/*.spec.ts",
+    "./**/*.test.ts",
+    "./**/*.test-d.ts",
+    "./test",
+    "./dist"
+  ]
 }
