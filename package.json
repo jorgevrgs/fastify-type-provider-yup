@@ -15,7 +15,7 @@
     "lint:fix": "biome check --write .",
     "test": "pnpm test:js && pnpm test:ts",
     "test:js": "vitest",
-    "test:ts": "vitest typecheck"
+    "test:ts": "vitest --typecheck"
   },
   "keywords": [
     "fastify",
