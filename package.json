@@ -1,7 +1,7 @@
 {
   "name": "fastify-type-provider-yup",
   "version": "0.0.4",
-  "description": "",
+  "description": "Yup type provider for Fastify v4",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
@@ -17,7 +17,14 @@
     "test:js": "vitest",
     "test:ts": "vitest typecheck"
   },
-  "keywords": [],
+  "keywords": [
+    "fastify",
+    "yup",
+    "type-providers",
+    "schemas",
+    "validation",
+    "serialization"
+  ],
   "author": "Jorge Vargas <jorgevargasla@gmail.com>",
   "license": "MIT",
   "devDependencies": {
