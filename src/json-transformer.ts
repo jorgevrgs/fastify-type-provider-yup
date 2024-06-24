@@ -1,14 +1,16 @@
-import { convertSchema } from '@sodaru/yup-to-json-schema';
-import { defaultResolveOptions, defaultSkipList } from './constants';
-import { resolveSchema } from './helpers';
-import type { FreeformRecord, Schema } from './types';
+import { convertSchema } from "@sodaru/yup-to-json-schema";
+import { defaultResolveOptions, defaultSkipList } from "./constants";
+import type { FreeformRecord, Schema } from "./types";
+import { resolveSchema } from "./utils";
 
 const defaultJsonSchemaTransformerOptions = {
   skipList: defaultSkipList,
   resolveOptions: defaultResolveOptions,
 };
 
-export const createJsonSchemaTransformer = (options = defaultJsonSchemaTransformerOptions) => {
+export const createJsonSchemaTransformer = (
+  options = defaultJsonSchemaTransformerOptions,
+) => {
   const { skipList, resolveOptions } = options;
 
   return ({ schema, url }: { schema: Schema; url: string }) => {
@@ -19,7 +21,8 @@ export const createJsonSchemaTransformer = (options = defaultJsonSchemaTransform
       };
     }
 
-    const { response, headers, querystring, body, params, hide, ...rest } = schema;
+    const { response, headers, querystring, body, params, hide, ...rest } =
+      schema;
 
     const transformed: FreeformRecord = {};
 
@@ -41,13 +44,13 @@ export const createJsonSchemaTransformer = (options = defaultJsonSchemaTransform
     if (response) {
       transformed.response = {};
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // biome-ignore lint/suspicious/noExplicitAny: required for type casting
       for (const prop in response as any) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // biome-ignore lint/suspicious/noExplicitAny: required for type casting
         const schema = resolveSchema((response as any)[prop]);
 
         const transformedResponse = convertSchema(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // biome-ignore lint/suspicious/noExplicitAny: required for type casting
           schema as any,
           resolveOptions,
         );

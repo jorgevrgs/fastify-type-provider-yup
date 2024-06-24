@@ -1,6 +1,6 @@
-const { yupPlugin } = require('..');
-const Fastify = require('fastify');
-const yup = require('yup');
+const { yupPlugin } = require("..");
+const Fastify = require("fastify");
+const yup = require("yup");
 
 const plugin = async (fastify) => {
   fastify.register(yupPlugin);
@@ -10,8 +10,8 @@ const app = Fastify({ logger: true });
 app.register(plugin);
 
 app.route({
-  method: 'GET',
-  url: '/',
+  method: "GET",
+  url: "/",
   schema: {
     querystring: yup
       .object({
@@ -33,4 +33,4 @@ app.route({
   },
 });
 
-app.listen({ port: 1337, host: '0.0.0.0' });
+app.listen({ port: 1337, host: "0.0.0.0" });

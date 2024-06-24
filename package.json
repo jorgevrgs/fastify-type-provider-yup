@@ -10,9 +10,9 @@
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "dev:cjs": "tsc-watch --noClear -p ./tsconfig.cjs.json --onSuccess \"node ./examples/plugin-common.example.cjs\"",
-    "format": "prettier --write .",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "lint:fix": "biome check --write .",
     "test": "pnpm test:js && pnpm test:ts",
     "test:js": "vitest",
     "test:ts": "vitest typecheck"
@@ -29,28 +29,19 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.22.17",
-    "@babel/eslint-parser": "^7.22.15",
+    "@biomejs/biome": "1.8.2",
     "@fastify/swagger": "^8.10.0",
     "@fastify/swagger-ui": "^1.9.3",
     "@tsconfig/node-lts": "^18.12.5",
     "@types/json-schema": "^7.0.12",
-    "@typescript-eslint/eslint-plugin": "^6.7.0",
-    "@typescript-eslint/parser": "^6.7.0",
-    "eslint": "^8.49.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-standard-with-typescript": "^39.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-    "eslint-plugin-promise": "^6.0.0",
     "fastify": "^4.23.0",
     "fastify-plugin": "^4.5.1",
     "json-schema": "^0.4.0",
     "pino-pretty": "^10.2.0",
-    "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.2.2",
-    "vitest": "^0.34.4",
+    "vitest": "^1.6.0",
     "yup": "^1.2.0"
   },
   "peerDependencies": {
@@ -68,7 +59,5 @@
     "url": "https://github.com/jorgevrgs/fastify-type-provider-yup/issues"
   },
   "homepage": "https://github.com/jorgevrgs/fastify-type-provider-yup#readme",
-  "files": [
-    "dist"
-  ]
+  "files": ["dist"]
 }

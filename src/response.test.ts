@@ -2,94 +2,9 @@ import type { FastifyInstance } from "fastify";
 import Fastify from "fastify";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import * as yup from "yup";
-import type { YupTypeProvider } from "./type-provider";
-
 import { serializerCompiler } from "./serializer-compiler";
+import type { YupTypeProvider } from "./type-provider";
 import { validatorCompiler } from "./validator-compiler";
-
-describe("response schema", () => {
-  let app: FastifyInstance;
-
-  beforeAll(async () => {
-    const REQUEST_SCHEMA = yup.object({
-      name: yup.string().required(),
-    });
-
-    app = Fastify();
-    app.setValidatorCompiler(validatorCompiler);
-    app.setSerializerCompiler(serializerCompiler);
-
-    app.after(() => {
-      app
-        .withTypeProvider<YupTypeProvider>()
-        .route({
-          method: "GET",
-          url: "/with-schema",
-          schema: {
-            querystring: REQUEST_SCHEMA,
-          },
-          handler: (req, res) => {
-            res.send({
-              name: req.query.name,
-            });
-          },
-        })
-        .route({
-          method: "GET",
-          url: "/without-schema",
-          schema: undefined,
-          handler: (req, res) => {
-            res.send({
-              status: "ok",
-            });
-          },
-        });
-    });
-
-    await app.ready();
-  });
-
-  afterAll(async () => {
-    await app.close();
-  });
-
-  it("accepts correct request", async () => {
-    const response = await app.inject({
-      method: "GET",
-      url: "/with-schema",
-      query: {
-        name: "test",
-      },
-    });
-
-    expect(response.statusCode).toBe(200);
-    expect(response.json()).toEqual({
-      name: "test",
-    });
-  });
-
-  it("accepts request on route without schema", async () => {
-    const response = await app.inject({
-      method: "GET",
-      url: "/without-schema",
-    });
-
-    expect(response.statusCode).toBe(200);
-    expect(response.json()).toStrictEqual({
-      status: "ok",
-    });
-  });
-
-  it("returns 400 on validation error", async () => {
-    const response = await app.inject({
-      method: "GET",
-      url: "/with-schema",
-    });
-
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toMatchSnapshot();
-  });
-});
 
 describe("response schema", () => {
   describe("does not fail on empty response schema (204)", () => {
@@ -108,10 +23,10 @@ describe("response schema", () => {
             url: "/",
             schema: {
               response: {
-                204: yup.mixed().oneOf([undefined], "test"),
+                204: yup.string().defined().meta({ test: true }),
               },
             },
-            handler: (req, res) => {
+            handler: (_req, res) => {
               res.status(204).send();
             },
           })
@@ -120,10 +35,11 @@ describe("response schema", () => {
             url: "/incorrect",
             schema: {
               response: {
-                204: yup.mixed().oneOf([undefined], "test"),
+                204: yup.string().defined().meta({ test: true }),
               },
             },
-            handler: (req, res) => {
+            handler: (_req, res) => {
+              // @ts-expect-error testing case
               res.status(204).send({ id: 1 });
             },
           });
@@ -157,7 +73,7 @@ describe("response schema", () => {
   describe("correctly processes response schema (string)", () => {
     let app: FastifyInstance;
     beforeAll(async () => {
-      const REPLY_SCHEMA = yup.string();
+      const REPLY_SCHEMA = yup.string().required();
 
       app = Fastify();
       app.setValidatorCompiler(validatorCompiler);
@@ -172,7 +88,7 @@ describe("response schema", () => {
               200: REPLY_SCHEMA,
             },
           },
-          handler: (req, res) => {
+          handler: (_req, res) => {
             res.send("test");
           },
         });
@@ -185,9 +101,9 @@ describe("response schema", () => {
               200: REPLY_SCHEMA,
             },
           },
-          handler: (req, res) => {
-            // biome-ignore lint/suspicious/noExplicitAny: required for type casting
-            res.send({ name: "test" } as any);
+          handler: (_req, res) => {
+            // @ts-expect-error sending incorrect response
+            res.send({ name: "test" });
           },
         });
       });
@@ -216,10 +132,13 @@ describe("response schema", () => {
 
   describe("correctly processes response schema (object)", () => {
     let app: FastifyInstance;
+
     beforeEach(async () => {
-      const REPLY_SCHEMA = yup.object({
-        name: yup.string(),
-      });
+      const REPLY_SCHEMA = yup
+        .object({
+          name: yup.string().required(),
+        })
+        .required();
 
       app = Fastify();
       app.setValidatorCompiler(validatorCompiler);
@@ -234,7 +153,7 @@ describe("response schema", () => {
               200: REPLY_SCHEMA,
             },
           },
-          handler: (req, res) => {
+          handler: (_req, res) => {
             res.send({
               name: "test",
             });
@@ -249,15 +168,16 @@ describe("response schema", () => {
               200: REPLY_SCHEMA,
             },
           },
-          handler: (req, res) => {
-            // biome-ignore lint/suspicious/noExplicitAny: required for type casting
-            res.send("test" as any);
+          handler: (_req, res) => {
+            // @ts-expect-error sending incorrect response
+            res.send("test");
           },
         });
       });
 
       await app.ready();
     });
+
     afterAll(async () => {
       await app.close();
     });

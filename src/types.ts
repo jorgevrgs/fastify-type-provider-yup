@@ -1,6 +1,6 @@
-import type { FastifySchema } from 'fastify';
-import type { JSONSchema7 } from 'json-schema';
-import type { SchemaDescription } from 'yup';
+import type { FastifySchema } from "fastify";
+import type { JSONSchema7 } from "json-schema";
+import type { SchemaDescription } from "yup";
 
 export type YupValidatorCompilerOptions = {
   // when true, parsing is skipped and the input is validated "as-is"
@@ -19,18 +19,21 @@ export type YupValidatorCompilerOptions = {
   context?: object;
 };
 
-export type Converter = (description: SchemaDescription, converters: Converters) => JSONSchema7;
+export type Converter = (
+  description: SchemaDescription,
+  converters: Converters,
+) => JSONSchema7;
 
 export type YupType =
-  | 'array'
-  | 'boolean'
-  | 'date'
-  | 'lazy'
-  | 'mixed'
-  | 'number'
-  | 'object'
-  | 'string'
-  | 'tuple';
+  | "array"
+  | "boolean"
+  | "date"
+  | "lazy"
+  | "mixed"
+  | "number"
+  | "object"
+  | "string"
+  | "tuple";
 
 export type Converters = Record<YupType, Converter>;
 
@@ -55,5 +58,5 @@ export interface Schema extends FastifySchema {
   hide?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: required for type casting
 export type FreeformRecord = Record<string, any>;

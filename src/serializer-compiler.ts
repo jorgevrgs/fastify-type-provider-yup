@@ -1,30 +1,17 @@
-import type { FastifySerializerCompiler } from 'fastify/types/schema';
-import type { AnySchema } from 'yup';
-import { defaultYupValidatorCompilerOptions } from './constants';
-import { ResponseValidationError } from './errors';
-import { resolveSchema } from './helpers';
-import type { YupValidatorCompilerOptions } from './types';
+import type { FastifySerializerCompiler } from "fastify/types/schema";
+import type { AnySchema } from "yup";
+import { defaultYupValidatorCompilerOptions } from "./constants";
+import { ResponseValidationError } from "./errors";
+import type { YupValidatorCompilerOptions } from "./types";
+import { resolveSchema, safeParse } from "./utils";
 
-const safeParse = <T>(
-  schema: Pick<AnySchema, 'validateSync'>,
-  data: T,
+export const createSerializerCompiler = (
   options: YupValidatorCompilerOptions,
-): { success: boolean; data?: T; error?: string } => {
-  try {
-    // Attempt to parse and validate the data using the Yup schema asynchronously
-    const parsedData = schema.validateSync(data, options);
-    return { success: true, data: parsedData };
-  } catch (error) {
-    // If validation fails, return an error message
-    return { success: false, error: (error as Error).message };
-  }
-};
-
-export const createSerializerCompiler = (options: YupValidatorCompilerOptions) => {
-  const serializerCompiler: FastifySerializerCompiler<AnySchema | { properties: AnySchema }> = ({
-    schema: maybeSchema,
-  }) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+) => {
+  const serializerCompiler: FastifySerializerCompiler<
+    AnySchema | { properties: AnySchema }
+  > = ({ schema: maybeSchema }) => {
+    // biome-ignore lint/suspicious/noExplicitAny: required for type casting
     return (data: any) => {
       const schema = resolveSchema(maybeSchema);
 
@@ -41,4 +28,6 @@ export const createSerializerCompiler = (options: YupValidatorCompilerOptions) =
   return serializerCompiler;
 };
 
-export const serializerCompiler = createSerializerCompiler(defaultYupValidatorCompilerOptions);
+export const serializerCompiler = createSerializerCompiler(
+  defaultYupValidatorCompilerOptions,
+);

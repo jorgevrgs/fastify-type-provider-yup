@@ -1,14 +1,14 @@
-import Fastify from 'fastify';
-import fp from 'fastify-plugin';
-import * as yup from 'yup';
-import { yupPlugin } from '../src/plugin';
-import { YupTypeProvider } from '../src/type-provider';
+import Fastify from "fastify";
+import fp from "fastify-plugin";
+import * as yup from "yup";
+import { yupPlugin } from "../src/plugin";
+import type { YupTypeProvider } from "../src/type-provider";
 
 const app = Fastify({ logger: true });
 app.register(fp(yupPlugin));
 app.withTypeProvider<YupTypeProvider>().route({
-  method: 'GET',
-  url: '/',
+  method: "GET",
+  url: "/",
   schema: {
     querystring: yup
       .object({
@@ -31,4 +31,4 @@ app.withTypeProvider<YupTypeProvider>().route({
   },
 });
 
-app.listen({ port: 8080, host: '0.0.0.0' });
+app.listen({ port: 8080, host: "0.0.0.0" });
