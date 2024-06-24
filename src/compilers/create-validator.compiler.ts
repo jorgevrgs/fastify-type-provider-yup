@@ -1,7 +1,6 @@
-import type { FastifySchemaCompiler } from "fastify";
-import type { AnySchema } from "yup";
-import { defaultYupValidatorCompilerOptions } from "./constants";
-import type { YupValidatorCompilerOptions } from "./types";
+import type { FastifySchemaCompiler } from 'fastify';
+import type { AnySchema } from 'yup';
+import type { YupValidatorCompilerOptions } from '../types';
 
 export const createValidatorCompiler = (
   options: YupValidatorCompilerOptions,
@@ -25,7 +24,3 @@ export const createValidatorCompiler = (
 
   return validatorCompiler;
 };
-
-export const validatorCompiler = createValidatorCompiler(
-  defaultYupValidatorCompilerOptions,
-);

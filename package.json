@@ -14,6 +14,8 @@
     "lint": "biome lint .",
     "lint:fix": "biome check --write .",
     "test": "pnpm test:js && pnpm test:ts",
+    "test:watch": "vitest --watch",
+    "test:cov": "vitest run --coverage",
     "test:js": "vitest",
     "test:ts": "vitest --typecheck"
   },
@@ -34,8 +36,8 @@
     "@fastify/swagger-ui": "^1.9.3",
     "@tsconfig/node-lts": "^18.12.5",
     "@types/json-schema": "^7.0.12",
+    "@vitest/coverage-v8": "^1.6.0",
     "fastify": "^4.23.0",
-    "fastify-plugin": "^4.5.1",
     "json-schema": "^0.4.0",
     "pino-pretty": "^10.2.0",
     "ts-node": "^10.9.1",
@@ -49,7 +51,8 @@
     "yup": "^1.2.0"
   },
   "dependencies": {
-    "@sodaru/yup-to-json-schema": "^2.0.1"
+    "@sodaru/yup-to-json-schema": "^2.0.1",
+    "fastify-plugin": "^4.5.1"
   },
   "repository": {
     "type": "git",
@@ -59,7 +62,5 @@
     "url": "https://github.com/jorgevrgs/fastify-type-provider-yup/issues"
   },
   "homepage": "https://github.com/jorgevrgs/fastify-type-provider-yup#readme",
-  "files": [
-    "dist"
-  ]
+  "files": ["dist"]
 }

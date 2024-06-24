@@ -1,13 +1,13 @@
-import fastifySwagger from "@fastify/swagger";
-import fastifySwaggerUI from "@fastify/swagger-ui";
-import { extendSchema } from "@sodaru/yup-to-json-schema";
-import Fastify from "fastify";
-import * as yup from "yup";
-import { Schema, addMethod } from "yup";
-import { jsonSchemaTransformer } from "../src/json-transformer";
-import { serializerCompiler } from "../src/serializer-compiler";
-import type { YupTypeProvider } from "../src/type-provider";
-import { validatorCompiler } from "../src/validator-compiler";
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUI from '@fastify/swagger-ui';
+import { extendSchema } from '@sodaru/yup-to-json-schema';
+import Fastify from 'fastify';
+import * as yup from 'yup';
+import { Schema, addMethod } from 'yup';
+import { jsonSchemaTransformer } from '../src/json-transformer';
+import { serializerCompiler } from '../src/serializer-compiler';
+import type { YupTypeProvider } from '../src/type-provider';
+import { validatorCompiler } from '../src/validator-compiler';
 
 extendSchema({ addMethod, Schema });
 
@@ -18,9 +18,9 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(fastifySwagger, {
   openapi: {
     info: {
-      title: "SampleApi",
-      description: "Sample backend service",
-      version: "1.0.0",
+      title: 'SampleApi',
+      description: 'Sample backend service',
+      version: '1.0.0',
     },
     servers: [],
   },
@@ -28,22 +28,22 @@ app.register(fastifySwagger, {
 });
 
 app.register(fastifySwaggerUI, {
-  routePrefix: "/docs",
+  routePrefix: '/docs',
 });
 
 app.after(() => {
   app.withTypeProvider<YupTypeProvider>().route({
-    url: "/",
-    method: "POST",
+    url: '/',
+    method: 'POST',
     schema: {
-      description: "Description details",
-      tags: ["home"],
+      description: 'Description details',
+      tags: ['home'],
       body: yup.object({
         page: yup.number().default(1),
       }),
       response: {
         200: yup.object({
-          page: yup.string().example("1"),
+          page: yup.string().example('1'),
         }),
       },
     },
@@ -57,4 +57,4 @@ app.after(() => {
   });
 });
 
-app.listen({ port: 8080, host: "0.0.0.0" });
+app.listen({ port: 8080, host: '0.0.0.0' });

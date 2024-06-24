@@ -1,1 +1,1 @@
-export * from "./response-validation.error";
+export * from './response-validation.error';

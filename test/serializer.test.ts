@@ -2,25 +2,23 @@ import type { FastifyInstance } from "fastify";
 import Fastify from "fastify";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import * as yup from "yup";
-import { serializerCompiler } from "./serializer-compiler";
-import type { YupTypeProvider } from "./type-provider";
-import { validatorCompiler } from "./validator-compiler";
+import type { YupTypeProvider } from "../src";
+import yupPlugin from "../src";
 
 describe("response schema", () => {
-  describe("does not fail on empty response schema (204)", () => {
-    let app: FastifyInstance;
+  let app: FastifyInstance;
 
+  describe("does not fail on empty response schema (204)", () => {
     beforeAll(async () => {
       app = Fastify();
-      app.setValidatorCompiler(validatorCompiler);
-      app.setSerializerCompiler(serializerCompiler);
+      app.register(yupPlugin);
 
       app.after(() => {
         app
           .withTypeProvider<YupTypeProvider>()
           .route({
             method: "GET",
-            url: "/",
+            url: "/correct",
             schema: {
               response: {
                 204: yup.string().defined().meta({ test: true }),
@@ -44,6 +42,7 @@ describe("response schema", () => {
             },
           });
       });
+
       await app.ready();
     });
 
@@ -52,7 +51,7 @@ describe("response schema", () => {
     });
 
     it("returns 204", async () => {
-      const response = await app.inject().get("/");
+      const response = await app.inject().get("/correct");
 
       expect(response.statusCode).toBe(204);
       expect(response.body).toEqual("");
@@ -71,41 +70,40 @@ describe("response schema", () => {
   });
 
   describe("correctly processes response schema (string)", () => {
-    let app: FastifyInstance;
     beforeAll(async () => {
-      const REPLY_SCHEMA = yup.string().required();
+      const REPLY_STRING_SCHEMA = yup.string().required();
 
       app = Fastify();
-      app.setValidatorCompiler(validatorCompiler);
-      app.setSerializerCompiler(serializerCompiler);
+      app.register(yupPlugin);
 
       app.after(() => {
-        app.withTypeProvider<YupTypeProvider>().route({
-          method: "GET",
-          url: "/",
-          schema: {
-            response: {
-              200: REPLY_SCHEMA,
+        app
+          .withTypeProvider<YupTypeProvider>()
+          .route({
+            method: "GET",
+            url: "/correct",
+            schema: {
+              response: {
+                200: REPLY_STRING_SCHEMA,
+              },
             },
-          },
-          handler: (_req, res) => {
-            res.send("test");
-          },
-        });
-
-        app.withTypeProvider<YupTypeProvider>().route({
-          method: "GET",
-          url: "/incorrect",
-          schema: {
-            response: {
-              200: REPLY_SCHEMA,
+            handler: (_req, res) => {
+              res.send("test");
             },
-          },
-          handler: (_req, res) => {
-            // @ts-expect-error sending incorrect response
-            res.send({ name: "test" });
-          },
-        });
+          })
+          .route({
+            method: "GET",
+            url: "/incorrect",
+            schema: {
+              response: {
+                200: REPLY_STRING_SCHEMA,
+              },
+            },
+            handler: (_req, res) => {
+              // @ts-expect-error sending incorrect response
+              res.send({ name: "test" });
+            },
+          });
       });
 
       await app.ready();
@@ -116,7 +114,7 @@ describe("response schema", () => {
     });
 
     it("returns 200 on correct response", async () => {
-      const response = await app.inject().get("/");
+      const response = await app.inject().get("/correct");
 
       expect(response.statusCode).toBe(200);
       expect(response.body).toEqual("test");
@@ -131,48 +129,46 @@ describe("response schema", () => {
   });
 
   describe("correctly processes response schema (object)", () => {
-    let app: FastifyInstance;
-
     beforeEach(async () => {
-      const REPLY_SCHEMA = yup
+      const REPLY_OBJECT_SCHEMA = yup
         .object({
           name: yup.string().required(),
         })
         .required();
 
       app = Fastify();
-      app.setValidatorCompiler(validatorCompiler);
-      app.setSerializerCompiler(serializerCompiler);
+      app.register(yupPlugin);
 
       app.after(() => {
-        app.withTypeProvider<YupTypeProvider>().route({
-          method: "GET",
-          url: "/",
-          schema: {
-            response: {
-              200: REPLY_SCHEMA,
+        app
+          .withTypeProvider<YupTypeProvider>()
+          .route({
+            method: "GET",
+            url: "/correct",
+            schema: {
+              response: {
+                200: REPLY_OBJECT_SCHEMA,
+              },
             },
-          },
-          handler: (_req, res) => {
-            res.send({
-              name: "test",
-            });
-          },
-        });
-
-        app.withTypeProvider<YupTypeProvider>().route({
-          method: "GET",
-          url: "/incorrect",
-          schema: {
-            response: {
-              200: REPLY_SCHEMA,
+            handler: (_req, res) => {
+              res.send({
+                name: "test",
+              });
             },
-          },
-          handler: (_req, res) => {
-            // @ts-expect-error sending incorrect response
-            res.send("test");
-          },
-        });
+          })
+          .route({
+            method: "GET",
+            url: "/incorrect",
+            schema: {
+              response: {
+                200: REPLY_OBJECT_SCHEMA,
+              },
+            },
+            handler: (_req, res) => {
+              // @ts-expect-error sending incorrect response
+              res.send("test");
+            },
+          });
       });
 
       await app.ready();
@@ -183,7 +179,7 @@ describe("response schema", () => {
     });
 
     it("returns 200 for correct response", async () => {
-      const response = await app.inject().get("/");
+      const response = await app.inject().get("/correct");
 
       expect(response.statusCode).toBe(200);
       expect(response.json()).toEqual({
