@@ -1,8 +1,8 @@
-import type { AnySchema } from "yup";
-import type { YupValidatorCompilerOptions } from "../types";
+import type { AnySchema } from 'yup';
+import type { YupValidatorCompilerOptions } from '../types';
 
 export const safeParse = <T>(
-  schema: Pick<AnySchema, "validateSync">,
+  schema: Pick<AnySchema, 'validateSync'>,
   data: T,
   options: YupValidatorCompilerOptions,
 ): { success: boolean; data?: T; error?: string } => {

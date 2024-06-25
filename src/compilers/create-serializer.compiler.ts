@@ -1,8 +1,8 @@
-import type { FastifySerializerCompiler } from "fastify/types/schema";
-import type { AnySchema } from "yup";
-import { ResponseValidationError } from "../errors";
-import type { YupValidatorCompilerOptions } from "../types";
-import { resolveSchema, safeParse } from "../utils";
+import type { FastifySerializerCompiler } from 'fastify/types/schema';
+import type { AnySchema } from 'yup';
+import { ResponseValidationError } from '../errors';
+import type { YupValidatorCompilerOptions } from '../types';
+import { resolveSchema, safeParse } from '../utils';
 
 export const createSerializerCompiler = (
   options: YupValidatorCompilerOptions,
