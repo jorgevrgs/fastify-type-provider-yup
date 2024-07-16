@@ -1,4 +1,4 @@
-import { FreeformRecord } from './types';
+import type { FreeformRecord } from '../types';
 
 export class ResponseValidationError extends Error {
   public details: FreeformRecord;

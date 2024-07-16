@@ -1,5 +1,15 @@
+import fastifyPlugin from 'fastify-plugin';
+import { yupPlugin } from './plugin';
+
+export * from './compilers';
+export * from './constants';
 export * from './json-transformer';
 export * from './plugin';
-export * from './serializer-compiler';
 export * from './type-provider';
-export * from './validator-compiler';
+export type * from './types';
+
+export const fastifyYupPlugin = fastifyPlugin(yupPlugin, {
+  name: 'fastify-yup',
+});
+
+export default fastifyYupPlugin;

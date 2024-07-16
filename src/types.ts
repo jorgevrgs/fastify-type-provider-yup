@@ -19,7 +19,10 @@ export type YupValidatorCompilerOptions = {
   context?: object;
 };
 
-export type Converter = (description: SchemaDescription, converters: Converters) => JSONSchema7;
+export type Converter = (
+  description: SchemaDescription,
+  converters: Converters,
+) => JSONSchema7;
 
 export type YupType =
   | 'array'
@@ -55,5 +58,5 @@ export interface Schema extends FastifySchema {
   hide?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny: required for type casting
 export type FreeformRecord = Record<string, any>;

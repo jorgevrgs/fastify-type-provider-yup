@@ -1,13 +1,13 @@
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
+import { extendSchema } from '@sodaru/yup-to-json-schema';
 import Fastify from 'fastify';
 import * as yup from 'yup';
-import { YupTypeProvider } from '../src/type-provider';
-import { validatorCompiler } from '../src/validator-compiler';
-import { serializerCompiler } from '../src/serializer-compiler';
-import { jsonSchemaTransformer } from '../src/json-transformer';
-import { extendSchema } from '@sodaru/yup-to-json-schema';
 import { Schema, addMethod } from 'yup';
+import { jsonSchemaTransformer } from '../src/json-transformer';
+import { serializerCompiler } from '../src/serializer-compiler';
+import type { YupTypeProvider } from '../src/type-provider';
+import { validatorCompiler } from '../src/validator-compiler';
 
 extendSchema({ addMethod, Schema });
 

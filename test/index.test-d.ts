@@ -9,9 +9,12 @@ import Fastify from 'fastify';
 import { expectTypeOf } from 'vitest';
 import * as yup from 'yup';
 
-import { serializerCompiler } from './serializer-compiler';
-import type { YupTypeProvider } from './type-provider';
-import { validatorCompiler } from './validator-compiler';
+import {
+  createSerializerCompiler,
+  createValidatorCompiler,
+  defaultYupValidatorCompilerOptions,
+} from '../src';
+import type { YupTypeProvider } from '../src/type-provider';
 
 const fastify = Fastify().withTypeProvider<YupTypeProvider>();
 
@@ -23,8 +26,19 @@ type FastifyYupInstance = FastifyInstance<
   YupTypeProvider
 >;
 
-expectTypeOf(fastify.setValidatorCompiler(validatorCompiler)).toMatchTypeOf<FastifyYupInstance>;
-expectTypeOf(fastify.setSerializerCompiler(serializerCompiler)).toMatchTypeOf<FastifyYupInstance>;
+const validatorCompiler = createValidatorCompiler(
+  defaultYupValidatorCompilerOptions,
+);
+const serializerCompiler = createSerializerCompiler(
+  defaultYupValidatorCompilerOptions,
+);
+
+expectTypeOf(fastify.setValidatorCompiler(validatorCompiler))
+  .toMatchTypeOf<FastifyYupInstance>;
+
+expectTypeOf(fastify.setSerializerCompiler(serializerCompiler))
+  .toMatchTypeOf<FastifyYupInstance>;
+
 expectTypeOf(fastify).toMatchTypeOf<FastifyYupInstance>;
 
 fastify.route({
