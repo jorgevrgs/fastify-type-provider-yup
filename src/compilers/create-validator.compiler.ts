@@ -6,8 +6,7 @@ export const createValidatorCompiler = (
   options: YupValidatorCompilerOptions,
 ) => {
   const validatorCompiler: FastifySchemaCompiler<AnySchema> = ({ schema }) => {
-    // biome-ignore lint/suspicious/noExplicitAny: required for type casting
-    return async (data: any) => {
+    return async (data: unknown) => {
       try {
         const value = schema.validateSync(data, options);
 
