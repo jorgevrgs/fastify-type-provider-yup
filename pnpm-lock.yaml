@@ -37,6 +37,9 @@ devDependencies:
   fastify:
     specifier: ^4.23.0
     version: 4.23.0
+  fastify-type-provider-zod:
+    specifier: ^2.0.0
+    version: 2.0.0(fastify@4.23.0)(zod@3.23.8)
   json-schema:
     specifier: ^0.4.0
     version: 0.4.0
@@ -58,6 +61,9 @@ devDependencies:
   yup:
     specifier: ^1.2.0
     version: 1.2.0
+  zod:
+    specifier: ^3.23.8
+    version: 3.23.8
 
 packages:
 
@@ -1367,6 +1373,17 @@ packages:
   /fastify-plugin@4.5.1:
     resolution: {integrity: sha512-stRHYGeuqpEZTL1Ef0Ovr2ltazUT9g844X5z/zEBFLG8RYlpDiOCIG+ATvYEp+/zmc7sN29mcIMp8gvYplYPIQ==}
 
+  /fastify-type-provider-zod@2.0.0(fastify@4.23.0)(zod@3.23.8):
+    resolution: {integrity: sha512-LSbz6DikD9BcQmSDFn7uXFmrFS2gRMiSkwiQeIeAH3XEGOyjokJKsH4DRRuxSn7fTz1UNTNiujib4+MTNw+nOg==}
+    peerDependencies:
+      fastify: ^4.0.0
+      zod: ^3.14.2
+    dependencies:
+      fastify: 4.23.0
+      zod: 3.23.8
+      zod-to-json-schema: 3.23.1(zod@3.23.8)
+    dev: true
+
   /fastify@4.23.0:
     resolution: {integrity: sha512-u4aQUjAqf+GQQI+IeIJtzOKCJHtdwPlGxzopq/Kv6QcEdJ7xuJFSQ5Bi7+uJ+F8990jWECLzRcAyZ4pVsloRpQ==}
     dependencies:
@@ -2464,4 +2481,16 @@ packages:
       tiny-case: 1.0.3
       toposort: 2.0.2
       type-fest: 2.19.0
+    dev: true
+
+  /zod-to-json-schema@3.23.1(zod@3.23.8):
+    resolution: {integrity: sha512-oT9INvydob1XV0v1d2IadrR74rLtDInLvDFfAa1CG0Pmg/vxATk7I2gSelfj271mbzeM4Da0uuDQE/Nkj3DWNw==}
+    peerDependencies:
+      zod: ^3.23.3
+    dependencies:
+      zod: 3.23.8
+    dev: true
+
+  /zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
     dev: true
