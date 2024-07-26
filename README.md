@@ -136,3 +136,44 @@ Module heavilty inspired by:
 
 - [fastify-type-provider-zod](https://github.com/turkerdev/fastify-type-provider-zod)
 - [fastify-yup-schema](https://github.com/balcieren/fastify-yup-schema)
+
+
+## Benchmarks
+
+Run:
+
+Go to folder `/benchmarks` and run the benchmark server:
+
+```sh
+node (both|serializer|validation)-(json|yup|zod).benchmark.cjs
+```
+
+Then run:
+
+```sh
+autocannon http://localhost:3000
+```
+
+### Serializer Results (Avg.)
+
+| Name | Version | Req/sec | Latency (ms) | Bytes/sec | Requests|
+| --- | --- | --- | --- | --- | --- |
+| fastify-type-provider-yup | 0.0.5 |  61,666.91 (79.61 %) | 0.01 | 11.6 MB | 678k req in 11.01s, 128 MB read  |
+| fastify-type-provider-zod | 2.0.0 |  77,119.00 (99.55 %) | 0.01 | 14.5 MB | 805k req in 11.01 s, 151 MB read |
+| fastify (raw) | 4.23.0 |  77,464.55 | 0.01 | 14.6 MB | 854k req in 11.01 s, 161 MB read |
+
+### Validation Results (Avg.)
+
+| Name | Version | Req/sec | Latency (ms) | Bytes/sec | Requests|
+| --- | --- | --- | --- | --- | --- |
+| fastify-type-provider-yup | 0.0.5 |  57,610.19 (80.90 %) | 0.01 | 10.4 MB | 634k req in 11.01s, 115 MB read  |
+| fastify-type-provider-zod | 2.0.0 |  70,893.10 (99.56 %) | 0.01 | 12.8 MB | 780k req in 11.01 s, 141 MB read |
+| fastify (raw) | 4.23.0 |  71,207.28 | 0.01 | 12.9 MB | 783k req in 11.02 s, 142 MB read |
+
+### Validation And Serialization Results (Avg.)
+
+| Name | Version | Req/sec | Latency (ms) | Bytes/sec | Requests|
+| --- | --- | --- | --- | --- | --- |
+| fastify-type-provider-yup | 0.0.5 |  43,690.19 (56.11 %) | 0.01 | 8 MB | 481k req in 11.01s, 88 MB read  |
+| fastify-type-provider-zod | 2.0.0 |  51,389.82 (66.00 %) | 0.01 | 9.4 MB | 565k req in 11.01 s, 103 MB read |
+| fastify (raw) | 4.23.0 |  77,861.82 | 0.01 | 14.2 MB | 856k req in 11.01 s, 157 MB read |
