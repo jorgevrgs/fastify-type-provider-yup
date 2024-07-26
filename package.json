@@ -49,8 +49,8 @@
     "zod": "^3.23.8"
   },
   "peerDependencies": {
-    "fastify": "^4.23.0",
-    "yup": "^1.2.0"
+    "fastify": "^4.28.1",
+    "yup": "^1.4.0"
   },
   "dependencies": {
     "@sodaru/yup-to-json-schema": "^2.0.1",
