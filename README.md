@@ -1,7 +1,6 @@
 # fastify-type-provider-yup
 
-[![NPM Version](https://img.shields.io/npm/v/fastify-type-provider-yup.svg)](https://npmjs.org/package/fastify-type-provider-yup)
-[![CI](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml/badge.svg)](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml)
+[![NPM Version](https://img.shields.io/npm/v/fastify-type-provider-yup.svg)](https://npmjs.org/package/fastify-type-provider-yup) [![CI](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml/badge.svg)](https://github.com/jorgevrgs/fastify-type-provider-yup/actions/workflows/tests.yml)
 
 ## Getting Started
 
@@ -10,6 +9,11 @@ pnpm add fastify-type-provider-yup
 yarn add fastify-type-provider-yup
 npm i fastify-type-provider-yup
 ```
+
+| Package | Version | Fastify Compatibility |
+| ------- | ------- | --------------------- |
+| `pnpm add fastify-type-provider-yup@4` | 4.x | 4.x |
+| `pnpm add fastify-type-provider-yup@5` | 5.x | 5.x |
 
 ## How to use
 
