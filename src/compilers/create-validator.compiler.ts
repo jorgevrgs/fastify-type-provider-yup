@@ -1,12 +1,12 @@
 import type { FastifySchemaCompiler } from 'fastify';
-import type { AnySchema } from 'yup';
+import type { AnySchema, ValidationError } from 'yup';
 import type { YupValidatorCompilerOptions } from '../types';
 
 export const createValidatorCompiler = (
   options: YupValidatorCompilerOptions,
 ) => {
   const validatorCompiler: FastifySchemaCompiler<AnySchema> = ({ schema }) => {
-    return async (data: unknown) => {
+    return (data: unknown) => {
       try {
         const value = schema.validateSync(data, options);
 
@@ -15,7 +15,7 @@ export const createValidatorCompiler = (
         };
       } catch (error) {
         return {
-          error,
+          error: error as ValidationError,
         };
       }
     };
