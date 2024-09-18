@@ -21,8 +21,8 @@ import type { AnySchema, InferType } from 'yup';
  * @see https://fastify.dev/docs/latest/Reference/Type-Providers
  */
 export interface YupTypeProvider extends FastifyTypeProvider {
-  serializer: this['input'] extends AnySchema ? InferType<this['input']> : never;
-  validator: this['input'] extends AnySchema ? InferType<this['input']> : never;
+  serializer: this['schema'] extends AnySchema ? InferType<this['schema']> : unknown;
+  validator: this['schema'] extends AnySchema ? InferType<this['schema']> : unknown;
 }
 
 /**
