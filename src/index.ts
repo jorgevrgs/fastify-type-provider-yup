@@ -9,7 +9,8 @@ export * from './type-provider';
 export type * from './types';
 
 export const fastifyYupPlugin = fastifyPlugin(yupPlugin, {
-  name: 'fastify-yup',
+  name: 'fastify-yup-type-provider',
+  fastify: '5.x'
 });
 
 export default fastifyYupPlugin;
