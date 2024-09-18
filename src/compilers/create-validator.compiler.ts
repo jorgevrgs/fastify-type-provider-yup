@@ -6,7 +6,7 @@ export const createValidatorCompiler = (
   options: YupValidatorCompilerOptions,
 ) => {
   const validatorCompiler: FastifySchemaCompiler<AnySchema> = ({ schema }) => {
-    return async (data: unknown) => {
+    return (data: unknown) => {
       try {
         const value = schema.validateSync(data, options);
 
