@@ -1,5 +1,5 @@
 import type { FastifySchemaCompiler } from 'fastify';
-import type { AnySchema } from 'yup';
+import type { AnySchema, ValidationError } from 'yup';
 import type { YupValidatorCompilerOptions } from '../types';
 
 export const createValidatorCompiler = (
@@ -15,7 +15,7 @@ export const createValidatorCompiler = (
         };
       } catch (error) {
         return {
-          error,
+          error: error as ValidationError,
         };
       }
     };
