@@ -41,9 +41,12 @@ app.after(() => {
         limit: yup.number().default(10),
       }),
       response: {
-        200: yup.object({
-          page: yup.string().example('1'),
-        }),
+        200: yup
+          .object({
+            page: yup.string().example('1').required(),
+            limit: yup.number().example(10).required(),
+          })
+          .example({ page: '1', limit: 10 }),
       },
     },
     handler: async (request, reply) => {
