@@ -1,4 +1,4 @@
-const { fastifyYupPlugin } = require('../dist/cjs');
+const { fastifyYupPlugin } = require('../dist/index.cjs');
 const Fastify = require('fastify');
 const yup = require('yup');
 const fp = require('fastify-plugin');

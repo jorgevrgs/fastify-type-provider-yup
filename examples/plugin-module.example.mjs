@@ -1,7 +1,7 @@
 // @ts-check
 import Fastify from 'fastify';
 import { number, object, string } from 'yup';
-import { fastifyYupPlugin } from '../dist/esm/index.js';
+import { fastifyYupPlugin } from '../dist/index.js';
 
 const app = Fastify({ logger: true });
 app.register(fastifyYupPlugin);

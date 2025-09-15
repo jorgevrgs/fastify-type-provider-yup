@@ -2,17 +2,26 @@
   "name": "fastify-type-provider-yup",
   "version": "5.0.1",
   "description": "Yup type provider for Fastify v5",
-  "main": "dist/cjs/index.js",
+  "type": "module",
+  "main": "dist/cjs/index.cjs",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
-  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.cts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    }
+  },
   "scripts": {
-    "build": "pnpm build:esm && pnpm build:cjs",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "dev:cjs": "tsc-watch --noClear -p ./tsconfig.cjs.json --onSuccess \"node ./examples/plugin-common.example.cjs\"",
+    "build": "tsup",
     "format": "biome format --write .",
-    "lint": "biome lint .",
+    "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "test": "pnpm test:js && pnpm test:ts",
     "test:watch": "vitest --watch",
@@ -33,11 +42,9 @@
   "author": "Jorge Vargas <jorgevargasla@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.28.4",
     "@biomejs/biome": "1.8.2",
     "@fastify/swagger": "^9.5.1",
     "@fastify/swagger-ui": "^5.2.3",
-    "@tsconfig/node-lts": "^22.0.2",
     "@types/json-schema": "^7.0.15",
     "@vitest/coverage-v8": "^3.2.4",
     "fastify": "^5.6.0",
@@ -45,6 +52,7 @@
     "json-schema": "^0.4.0",
     "pino-pretty": "^13.1.1",
     "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4",
     "yup": "^1.7.0",
