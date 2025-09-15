@@ -1,6 +1,6 @@
 {
   "name": "fastify-type-provider-yup",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Yup type provider for Fastify v5",
   "type": "module",
   "main": "dist/cjs/index.cjs",
