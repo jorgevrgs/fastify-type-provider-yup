@@ -34,12 +34,12 @@ const serializerCompiler = createSerializerCompiler(
 );
 
 expectTypeOf(fastify.setValidatorCompiler(validatorCompiler))
-  .toMatchTypeOf<FastifyYupInstance>;
+  .toExtend<FastifyYupInstance>;
 
 expectTypeOf(fastify.setSerializerCompiler(serializerCompiler))
-  .toMatchTypeOf<FastifyYupInstance>;
+  .toExtend<FastifyYupInstance>;
 
-expectTypeOf(fastify).toMatchTypeOf<FastifyYupInstance>;
+expectTypeOf(fastify).toExtend<FastifyYupInstance>;
 
 fastify.route({
   method: 'GET',
@@ -53,7 +53,7 @@ fastify.route({
     },
   },
   handler: (request, reply) => {
-    expectTypeOf(request.query.name).toMatchTypeOf<string>;
+    expectTypeOf(request.query.name).toExtend<string>;
     reply.send('string');
   },
 });

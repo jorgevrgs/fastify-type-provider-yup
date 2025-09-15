@@ -11,6 +11,7 @@ export default defineConfig({
         functions: 90,
         lines: 90,
       },
+      include: ['src/**/*.ts'],
     },
   },
 });

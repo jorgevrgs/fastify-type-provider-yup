@@ -1,13 +1,14 @@
-const { yupPlugin } = require('..');
+const { fastifyYupPlugin } = require('../dist/index.cjs');
 const Fastify = require('fastify');
 const yup = require('yup');
+const fp = require('fastify-plugin');
 
 const plugin = async (fastify) => {
-  fastify.register(yupPlugin);
+  fastify.register(fastifyYupPlugin);
 };
 
 const app = Fastify({ logger: true });
-app.register(plugin);
+app.register(fp(plugin));
 
 app.route({
   method: 'GET',
@@ -16,19 +17,22 @@ app.route({
     querystring: yup
       .object({
         page: yup.number().default(1),
+        limit: yup.number().default(10),
       })
       .noUnknown(),
     response: {
       200: yup.object({
         page: yup.string(),
+        limit: yup.number(),
       }),
     },
   },
   handler: async (request, reply) => {
-    const { page } = request.query;
+    const { page, limit } = request.query;
 
     return {
       page,
+      limit,
     };
   },
 });

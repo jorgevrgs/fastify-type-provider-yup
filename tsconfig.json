@@ -1,11 +1,20 @@
 {
-  "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "declarationMap": true,
-    "rootDir": "src",
     "declarationDir": "dist/types",
-    "lib": ["es2023", "DOM"]
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "lib": ["es2022", "DOM"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2022",
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
   "include": ["src/**/*.ts"],
   "exclude": [

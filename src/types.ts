@@ -49,10 +49,10 @@ export type YupJsonTransformerOptions = {
   resolveOptions: ResolveOptions;
 };
 
-export type YupPluginOptions = {
+export type YupPluginOptions = Partial<{
   serializerCompilerOptions: YupValidatorCompilerOptions;
   validatorCompilerOptions: YupValidatorCompilerOptions;
-};
+}>;
 
 export interface Schema extends FastifySchema {
   hide?: boolean;

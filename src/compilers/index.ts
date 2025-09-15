@@ -1,2 +1,2 @@
-export * from './create-serializer.compiler';
-export * from './create-validator.compiler';
+export * from './create-serializer.compiler.js';
+export * from './create-validator.compiler.js';

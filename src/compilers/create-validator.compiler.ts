@@ -1,6 +1,6 @@
 import type { FastifySchemaCompiler } from 'fastify';
 import type { AnySchema, ValidationError } from 'yup';
-import type { YupValidatorCompilerOptions } from '../types';
+import type { YupValidatorCompilerOptions } from '../types.js';
 
 export const createValidatorCompiler = (
   options: YupValidatorCompilerOptions,

@@ -1,2 +1,2 @@
-export * from './resolve-schema.util';
-export * from './safe-parse.util';
+export * from './resolve-schema.util.js';
+export * from './safe-parse.util.js';
