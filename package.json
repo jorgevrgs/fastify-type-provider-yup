@@ -74,7 +74,5 @@
     "url": "https://github.com/jorgevrgs/fastify-type-provider-yup/issues"
   },
   "homepage": "https://github.com/jorgevrgs/fastify-type-provider-yup#readme",
-  "files": [
-    "dist"
-  ]
+  "files": ["dist"]
 }
