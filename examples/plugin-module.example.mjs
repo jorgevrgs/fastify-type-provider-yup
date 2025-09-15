@@ -1,34 +1,33 @@
+// @ts-check
 import Fastify from 'fastify';
-import * as yup from 'yup';
-import { yupPlugin } from '..';
-
-const plugin = async (fastify) => {
-  fastify.register(yupPlugin);
-};
+import { number, object, string } from 'yup';
+import { fastifyYupPlugin } from '../dist/esm/index.js';
 
 const app = Fastify({ logger: true });
-app.register(plugin);
+app.register(fastifyYupPlugin);
 
 app.route({
   method: 'GET',
   url: '/',
   schema: {
-    querystring: yup
-      .object({
-        page: yup.number().default(1),
-      })
-      .noUnknown(),
+    querystring: object({
+      page: number().default(1),
+      limit: number().default(10),
+    }).noUnknown(),
     response: {
-      200: yup.object({
-        page: yup.string(),
+      200: object({
+        page: string(),
+        limit: number(),
       }),
     },
   },
+  /** @type {import('fastify').RouteHandler<{ Querystring: {page: number; limit: number} }>} */
   handler: async (request, reply) => {
-    const { page } = request.query;
+    const { page, limit } = request.query;
 
     return {
       page,
+      limit,
     };
   },
 });

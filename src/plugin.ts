@@ -1,13 +1,13 @@
 import type { FastifyPluginAsync } from 'fastify';
 
-import { createSerializerCompiler } from './compilers/create-serializer.compiler';
-import { createValidatorCompiler } from './compilers/create-validator.compiler';
-import { defaultYupValidatorCompilerOptions } from './constants';
-import type { YupPluginOptions } from './types';
+import { createSerializerCompiler } from './compilers/create-serializer.compiler.js';
+import { createValidatorCompiler } from './compilers/create-validator.compiler.js';
+import { defaultYupValidatorCompilerOptions } from './constants.js';
+import type { YupPluginOptions } from './types.js';
 
 export const yupPlugin: FastifyPluginAsync<YupPluginOptions> = async (
   fastify,
-  options,
+  options = {},
 ) => {
   const {
     serializerCompilerOptions = defaultYupValidatorCompilerOptions,

@@ -1,7 +1,7 @@
 import { convertSchema } from '@sodaru/yup-to-json-schema';
-import { defaultResolveOptions, defaultSkipList } from './constants';
-import type { FreeformRecord, Schema } from './types';
-import { resolveSchema } from './utils';
+import { defaultResolveOptions, defaultSkipList } from './constants.js';
+import type { FreeformRecord, Schema } from './types.js';
+import { resolveSchema } from './utils/index.js';
 
 const defaultJsonSchemaTransformerOptions = {
   skipList: defaultSkipList,

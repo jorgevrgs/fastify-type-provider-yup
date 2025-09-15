@@ -1,4 +1,4 @@
-import type { ResolveOptions, YupValidatorCompilerOptions } from './types';
+import type { ResolveOptions, YupValidatorCompilerOptions } from './types.js';
 
 export const defaultResolveOptions: ResolveOptions = {} as const;
 

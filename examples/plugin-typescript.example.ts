@@ -1,8 +1,8 @@
 import Fastify from 'fastify';
 import fp from 'fastify-plugin';
 import * as yup from 'yup';
-import { yupPlugin } from '../src/plugin';
-import type { YupTypeProvider } from '../src/type-provider';
+import type { YupTypeProvider } from '../dist/types';
+import { yupPlugin } from '../dist/types';
 
 const app = Fastify({ logger: true });
 app.register(fp(yupPlugin));

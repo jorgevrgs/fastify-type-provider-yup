@@ -1,5 +1,5 @@
 import type { AnySchema } from 'yup';
-import type { YupValidatorCompilerOptions } from '../types';
+import type { YupValidatorCompilerOptions } from '../types.js';
 
 export const safeParse = <T>(
   schema: Pick<AnySchema, 'validateSync'>,

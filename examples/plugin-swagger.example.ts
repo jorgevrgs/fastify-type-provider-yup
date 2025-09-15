@@ -4,16 +4,14 @@ import { extendSchema } from '@sodaru/yup-to-json-schema';
 import Fastify from 'fastify';
 import * as yup from 'yup';
 import { Schema, addMethod } from 'yup';
-import { jsonSchemaTransformer } from '../src/json-transformer';
-import { serializerCompiler } from '../src/serializer-compiler';
-import type { YupTypeProvider } from '../src/type-provider';
-import { validatorCompiler } from '../src/validator-compiler';
+import type { YupTypeProvider } from '../src/index.js';
+import { fastifyYupPlugin, jsonSchemaTransformer } from '../src/index.js';
 
 extendSchema({ addMethod, Schema });
 
 const app = Fastify({ logger: true });
-app.setValidatorCompiler(validatorCompiler);
-app.setSerializerCompiler(serializerCompiler);
+
+app.register(fastifyYupPlugin);
 
 app.register(fastifySwagger, {
   openapi: {
@@ -40,6 +38,7 @@ app.after(() => {
       tags: ['home'],
       body: yup.object({
         page: yup.number().default(1),
+        limit: yup.number().default(10),
       }),
       response: {
         200: yup.object({
@@ -48,13 +47,14 @@ app.after(() => {
       },
     },
     handler: async (request, reply) => {
-      const { page } = request.body;
+      const { page, limit } = request.body;
 
       return {
         page: String(page),
+        limit: limit,
       };
     },
   });
 });
 
-app.listen({ port: 8080, host: '0.0.0.0' });
+app.listen({ port: 1337, host: '0.0.0.0' });
