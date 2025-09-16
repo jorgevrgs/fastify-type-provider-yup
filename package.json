@@ -1,6 +1,6 @@
 {
   "name": "fastify-type-provider-yup",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "Yup type provider for Fastify v5",
   "type": "module",
   "exports": {
@@ -72,5 +72,7 @@
     "url": "https://github.com/jorgevrgs/fastify-type-provider-yup/issues"
   },
   "homepage": "https://github.com/jorgevrgs/fastify-type-provider-yup#readme",
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }
