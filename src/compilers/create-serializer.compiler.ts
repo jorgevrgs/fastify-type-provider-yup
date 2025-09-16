@@ -9,7 +9,7 @@ export const createSerializerCompiler = (
 ) => {
   const serializerCompiler: FastifySerializerCompiler<
     AnySchema | { properties: AnySchema }
-  > = ({ schema: maybeSchema }) => {
+  > = ({ schema: maybeSchema, method, url }) => {
     return (data: unknown) => {
       const schema = resolveSchema(maybeSchema);
 
@@ -19,7 +19,9 @@ export const createSerializerCompiler = (
         return JSON.stringify(result.data);
       }
 
-      throw new ResponseValidationError(result);
+      throw new ResponseValidationError(method, url, {
+        cause: result.error,
+      });
     };
   };
 

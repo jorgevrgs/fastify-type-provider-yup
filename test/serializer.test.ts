@@ -62,6 +62,7 @@ describe('response schema', () => {
 
       expect(response.statusCode).toBe(500);
       expect(response.json()).toEqual({
+        code: 'FST_ERR_RESPONSE_SERIALIZATION',
         error: 'Internal Server Error',
         message: "Response doesn't match the schema",
         statusCode: 500,
