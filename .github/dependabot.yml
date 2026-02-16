@@ -1,14 +1,16 @@
 version: 2
 updates:
-  # Enable version updates for npm
+  # Enable version updates for npm (works with pnpm via package.json and pnpm-lock.yaml)
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
       time: "09:00"
-      timezone: "America/Mexico_City"
+      timezone: "America/Bogota"
     open-pull-requests-limit: 10
+    # Dependabot will detect and use pnpm-lock.yaml automatically
+    versioning-strategy: increase
     labels:
       - "dependencies"
       - "automated"
@@ -41,7 +43,7 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "09:00"
-      timezone: "America/Mexico_City"
+      timezone: "America/Bogota"
     open-pull-requests-limit: 5
     labels:
       - "github-actions"
