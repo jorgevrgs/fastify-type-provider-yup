@@ -25,6 +25,7 @@
     "test:cov": "vitest run --coverage",
     "test:js": "vitest",
     "test:ts": "vitest --typecheck",
+    "example:node": "nodemon examples/plugin-module-fail-reply.example.mjs",
     "example:ts": "nodemon --exec node --loader ts-node/esm --inspect examples/plugin-swagger.example.ts",
     "prepare": "husky"
   },

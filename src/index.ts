@@ -3,6 +3,7 @@ import { yupPlugin } from './plugin.js';
 
 export * from './compilers/index.js';
 export * from './constants.js';
+export * from './errors/index.js';
 export * from './json-transformer.js';
 export * from './plugin.js';
 export * from './type-provider.js';
