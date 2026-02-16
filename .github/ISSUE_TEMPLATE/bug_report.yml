@@ -1,0 +1,161 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to report a bug! Please fill out the information below to help us investigate.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Please confirm the following before submitting
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I am using the latest version of fastify-type-provider-yup
+          required: true
+        - label: I have read the documentation
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is
+      placeholder: Describe the bug...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: I expected...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Instead...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Please provide detailed steps to reproduce the issue
+      placeholder: |
+        1. Install fastify-type-provider-yup
+        2. Create a route with...
+        3. Call the endpoint with...
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Minimal Reproduction Code
+      description: Please provide a minimal code example that reproduces the issue
+      placeholder: |
+        ```typescript
+        import Fastify from 'fastify';
+        import { YupTypeProvider } from 'fastify-type-provider-yup';
+        // ... your code here
+        ```
+      render: typescript
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Error Message/Stack Trace
+      description: If applicable, paste the error message or stack trace
+      placeholder: Paste error here...
+      render: shell
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js Version
+      description: Output of `node --version`
+      placeholder: v20.10.0
+    validations:
+      required: true
+
+  - type: input
+    id: fastify-version
+    attributes:
+      label: Fastify Version
+      description: Version of Fastify you're using
+      placeholder: 5.6.0
+    validations:
+      required: true
+
+  - type: input
+    id: yup-version
+    attributes:
+      label: Yup Version
+      description: Version of Yup you're using
+      placeholder: 1.7.0
+    validations:
+      required: true
+
+  - type: input
+    id: package-version
+    attributes:
+      label: fastify-type-provider-yup Version
+      description: Version of this package you're using
+      placeholder: 5.1.1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What OS are you using?
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other (please specify in additional context)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: package-manager
+    attributes:
+      label: Package Manager
+      description: Which package manager are you using?
+      options:
+        - pnpm
+        - npm
+        - yarn
+        - bun
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here (e.g., related issues, workarounds tried, etc.)
+      placeholder: Additional information...
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Would you like to work on a fix?
+      options:
+        - label: I'm interested in submitting a pull request to fix this issue

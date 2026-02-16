@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Question or Discussion
+    url: https://github.com/jorgevrgs/fastify-type-provider-yup/discussions
+    about: Ask questions or discuss ideas with the community
+  - name: Fastify Documentation
+    url: https://fastify.dev/
+    about: Official Fastify documentation
+  - name: Yup Documentation
+    url: https://github.com/jquense/yup
+    about: Official Yup validation library documentation
